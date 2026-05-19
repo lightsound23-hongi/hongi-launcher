@@ -331,7 +331,11 @@ def open_vscode() -> None:
 
 
 def open_shell() -> None:
-    _run(["wt.exe", "new-tab", "--title", "Hong-Shell", "ssh", SSH_TARGET])
+    try:
+        subprocess.Popen(["wt.exe", "new-tab", "--title", "Hong-Shell", "ssh", "hongi"])
+    except FileNotFoundError:
+        # wt.exe 없으면 PowerShell로 폴백
+        subprocess.Popen(["powershell.exe", "-NoExit", "-Command", "ssh hongi"])
 
 
 def open_llama() -> None:
