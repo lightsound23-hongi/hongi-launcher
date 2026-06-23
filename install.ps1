@@ -1,9 +1,21 @@
 # HongiLauncher installer
-# irm https://bit.ly/HONGI-L | iex
+# irm https://raw.githubusercontent.com/lightsound23-hongi/hongi-launcher/main/install.ps1 | iex
 
 $ErrorActionPreference = "Stop"
 $InstallDir = "$env:LOCALAPPDATA\Programs\HongiLauncher"
 $ExePath = "$InstallDir\HongiLauncher.exe"
+
+Write-Host "Stopping existing HongiLauncher processes..."
+Get-Process -Name "HongiLauncher" -ErrorAction SilentlyContinue | Stop-Process -Force
+Start-Sleep -Milliseconds 500
+
+Write-Host "Removing old installation..."
+if (Test-Path $InstallDir) { Remove-Item -Recurse -Force $InstallDir }
+
+$StartMenuShortcut = "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\HongiLauncher.lnk"
+$DesktopShortcut   = "$env:USERPROFILE\Desktop\HongiLauncher.lnk"
+if (Test-Path $StartMenuShortcut) { Remove-Item -Force $StartMenuShortcut }
+if (Test-Path $DesktopShortcut)   { Remove-Item -Force $DesktopShortcut }
 
 Write-Host "Installing HongiLauncher..."
 
