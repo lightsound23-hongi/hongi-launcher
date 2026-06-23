@@ -8,7 +8,7 @@ $ExePath = "$InstallDir\HongiLauncher.exe"
 Write-Host "Installing HongiLauncher..."
 
 # Get latest release URL
-$api = "https://api.github.com/repos/one2step/hongi-launcher/releases/latest"
+$api = "https://api.github.com/repos/lightsound23-hongi/hongi-launcher/releases/latest"
 $release = Invoke-RestMethod -Uri $api -UseBasicParsing
 $asset = $release.assets | Where-Object { $_.name -eq "HongiLauncher.exe" } | Select-Object -First 1
 
